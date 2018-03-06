@@ -5,6 +5,7 @@ import configparser
 def doesconfigexist():
     exist_accountconf = os.path.isfile('./accounts.ini')
     count_account = os.path.isfile('./count_account.ini')
+
     if exist_accountconf == True:
         print("accounts.ini file found")
     else:
@@ -27,6 +28,3 @@ def doesconfigexist():
         with open('count_account.ini', 'w') as configfile2:
             config.write(configfile2)
             configfile2.close()
-
-
-doesconfigexist()

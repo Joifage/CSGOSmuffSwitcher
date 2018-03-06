@@ -13,9 +13,7 @@ def deleteaccount():
         account_countnew = "none"
         parser.read('count_account.ini')
         account_countnew = int(parser['DEFAULT']['account_count'])
-        print("Amount of accounts set:", account_countnew)
         account_countnew = account_countnew - 1
-        print("new account number = ", account_countnew)
         account_countnew = str(account_countnew)
         open("count_account.ini", 'a')
         cfgfile2 = open("count_account.ini",
