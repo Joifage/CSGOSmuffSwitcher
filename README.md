@@ -1,8 +1,11 @@
 # CSGOSmuffSwitcher
 
 Author: Joif
+
 Purpose: Fast Switching between Steam accounts
+
 Version: 1.1
+
 Date updated: 14/03/2018
 
 Written for Python3.6 
@@ -14,6 +17,7 @@ Run the bat file and follow the instructions, if you need to revert to the first
 If you don't like the dank choon feel free to delete it from the sound folder
 
 [changelog]
+
 v1.1
 
 - Added SimpleRadar download/install functionality
