@@ -8,6 +8,31 @@ def steam():
     config.read('conf.ini')
     steam_path = config['general']['steam_path']
     if steam_path == "N/A":
+        validation = False
+        while not validation:
+            try:
+                reg_key = 'Software\Valve\Steam'
+                hreg = ConnectRegistry(None, HKEY_CURRENT_USER)
+                hkey = OpenKey(hreg, reg_key)
+                dir_path_new = QueryValueEx(hkey, 'SteamExe')[0]
+                CloseKey(hkey)
+                dir_path_new = dir_path_new.strip(
+                    '"%1 ')
+                dir_path_new = dir_path_new.replace("Steam.exe",
+                                                    '')
+                validation = os.path.isfile(dir_path_new + '\\')
+                if validation is True:
+                    cfgfile = open("conf.ini", 'w')
+                    config.set('general', 'steam_path', dir_path_new)
+                    config.write(cfgfile)
+                    cfgfile.close()
+                    print("Steam Path Set Successfully")
+                    return
+                else:
+                    print("Steam.exe not found")
+            except Exception as e:
+                print('ERROR: Please try again -', e)
+                validation = True
         choice = None
         while choice != "1" or choice != "2" or choice != "3":
             print("""
@@ -67,32 +92,6 @@ def steam():
                         return
                     else:
                         print("Not a valid directory please retry")
-            elif choice == "3":
-                validation = False
-                while not validation:
-                    try:
-                        reg_key = 'Software\Valve\Steam'
-                        hreg = ConnectRegistry(None, HKEY_CURRENT_USER)
-                        hkey = OpenKey(hreg, reg_key)
-                        dir_path_new = QueryValueEx(hkey, 'SteamExe')[0]
-                        CloseKey(hkey)
-                        dir_path_new = dir_path_new.strip(
-                            '"%1 ')
-                        dir_path_new = dir_path_new.replace("Steam.exe",
-                                                            '')
-                        validation = os.path.isfile(dir_path_new + '\\')
-                        if validation is True:
-                            cfgfile = open("conf.ini", 'w')
-                            config.set('general', 'steam_path', dir_path_new)
-                            config.write(cfgfile)
-                            cfgfile.close()
-                            print("Steam Path Set Successfully")
-                            return
-                        else:
-                            print("Steam.exe not found")
-                    except Exception as e:
-                        print('ERROR: Please try again -', e)
-                        validation = True
             elif choice == "0":
                 print("Quitting... Goodbye!")
                 exit(1)

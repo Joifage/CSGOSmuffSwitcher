@@ -1,13 +1,37 @@
-import os
-import configparser
 from winreg import *
 
 
 def csgo():
+    import os
+    import configparser
     config = configparser.ConfigParser()
     config.read('conf.ini')
     csgo_path = config['general']['csgo_path']
     if csgo_path == "N/A":
+        validation = False
+        while not validation:
+            try:
+                reg_key = 'SOFTWARE\Classes\Applications\csgo.exe\shell\open\command'
+                hreg = ConnectRegistry(None, HKEY_LOCAL_MACHINE)
+                hkey = OpenKey(hreg, reg_key)
+                dir_path_new = QueryValueEx(hkey, '')[0]
+                CloseKey(hkey)
+                dir_path_new = dir_path_new.strip(
+                    '"%1 ')
+                validation = os.path.isfile(dir_path_new)
+                if validation is True:
+                    cfgfile = open("conf.ini", 'w')
+                    config.set('general', 'csgo_path', dir_path_new)
+                    config.write(cfgfile)
+                    cfgfile.close()
+                    print("CSGO Path Set Successfully")
+                    return
+                else:
+                    print("csgo.exe not found")
+                    return
+            except Exception as e:
+                print('ERROR: Please try again -', e)
+                validation = True
         choice = None
         while choice != "1" or choice != "2" or choice != "3":
             print("""   
@@ -15,7 +39,6 @@ def csgo():
     
                      1. Automatic (Scan Drive - Slow)
                      2. Manual    (Select Directory)
-                     3. Registry  (Fast)
     
                      0. Exit
                """
@@ -71,31 +94,6 @@ def csgo():
                             print("Not a valid directory please retry")
                     else:
                         print("Not a valid directory please retry")
-            elif choice == "3":
-                validation = False
-                while not validation:
-                    try:
-                        reg_key = 'SOFTWARE\Classes\Applications\csgo.exe\shell\open\command'
-                        hreg = ConnectRegistry(None, HKEY_LOCAL_MACHINE)
-                        hkey = OpenKey(hreg, reg_key)
-                        dir_path_new = QueryValueEx(hkey, '')[0]
-                        CloseKey(hkey)
-                        dir_path_new = dir_path_new.strip(
-                            '"%1 ')
-                        validation = os.path.isfile(dir_path_new)
-                        if validation is True:
-                            cfgfile = open("conf.ini", 'w')
-                            config.set('general', 'csgo_path', dir_path_new)
-                            config.write(cfgfile)
-                            cfgfile.close()
-                            print("CSGO Path Set Successfully")
-                            return
-                        else:
-                            print("csgo.exe not found")
-                            return
-                    except Exception as e:
-                        print('ERROR: Please try again -', e)
-                        validation = True
             elif choice == "0":
                 print("Quitting... Goodbye!")
                 exit(1)

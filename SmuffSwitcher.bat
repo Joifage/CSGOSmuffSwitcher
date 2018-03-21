@@ -1,3 +1,3 @@
-title CSGO Smuff Switcher v1.0 by Joif
+title CSGO Smuff Switcher v1.1 by Joif
 cls
-python main.py
+python __main__.py
