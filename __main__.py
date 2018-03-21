@@ -32,7 +32,7 @@ def main():
     choice = 'none'
     while choice >= "0" or choice <= "16" or choice != "a" or choice != "d" or choice != "e" or choice != "x" or choice != "m":
         doesconfigexist()
-        importlib.reload(count)
+        count()
         importlib.reload(accountread)
         a = accountread
         print("""
