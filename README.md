@@ -26,3 +26,4 @@ v1.1
 - Added sounds
 - Added linking to websites
 - Added option to delete config file
+- Added dynamic price updates in the buy smurf section
