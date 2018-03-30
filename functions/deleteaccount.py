@@ -1,7 +1,7 @@
 import configparser
 
 
-def deleteaccount():
+def delete_account():
     try:
         delete = input("Select the account number to delete: ")
         parser = configparser.ConfigParser()
@@ -19,14 +19,13 @@ def deleteaccount():
                     section_new_name = i - 1
                     section_new_name = str(section_new_name)
                     config_file.close()
-                    cfgfile = open("conf.ini",
-                                    'w')
+                    cfg_file = open("conf.ini", 'w')
                     parser.add_section(section_new_name)
                     for option, value in section_items:
                         parser.set(section_new_name, option, value)
                         parser.remove_section(rename_section)
-                    parser.write(cfgfile)
-                    cfgfile.close()
+                    parser.write(cfg_file)
+                    cfg_file.close()
             except:
                 pass
     except Exception as e:

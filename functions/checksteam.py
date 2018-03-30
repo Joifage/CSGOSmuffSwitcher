@@ -1,6 +1,7 @@
 def isrunning():
     import os
     import configparser
+    import time
     os.system('cls')
     try:
         import subprocess
@@ -11,13 +12,17 @@ def isrunning():
         processes = subprocess.Popen('tasklist', stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                      stdout=subprocess.PIPE).communicate()[0]
         if 'Steam.exe'.encode() in processes:
-            steamfound = True
-            print("Steam Running:", steamfound, "...Closing")
+            steam_found = True
             subprocess.check_call([steam_path, "-shutdown"])
+            for i in range(0, 4):
+                os.system('cls')
+                print("Steam Running:", steam_found, "Closing." + "." * i)
+                time.sleep(1)
+            subprocess.check_call('taskkill /f /im Steam.exe')
             return
         else:
-            steamfound = False
-            print("Steam Running:", steamfound)
+            steam_found = False
+            print("Steam Running:", steam_found)
             return
     except:
         pass

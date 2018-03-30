@@ -2,7 +2,9 @@ import simpradar
 import os
 import sys
 import buysmuff
+import steam_stats
 sys.path.insert(0, '..')
+
 
 def main():
     os.system('cls')
@@ -13,6 +15,7 @@ def main():
             
                 1. Install Simple Radar
                 2. Buy a smuff
+                3. CSGO Stats
                 
                 9. Delete Config File (Reset)
                 
@@ -26,6 +29,9 @@ def main():
             return
         elif choice == "2":
             buysmuff.getprice()
+            return
+        elif choice == "3":
+            steam_stats.get_stats()
             return
         elif choice == "9":
             try:

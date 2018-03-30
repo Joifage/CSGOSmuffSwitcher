@@ -1,3 +1,5 @@
+@echo off
 title CSGO Smuff Switcher v1.1 by Joif
 cls
-python __main__.py
+color 0A
+python main.py

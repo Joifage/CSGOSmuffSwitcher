@@ -2,9 +2,9 @@ import os
 import configparser
 
 
-def doesconfigexist():
-    exist_accountconf = os.path.isfile('./conf.ini')
-    if exist_accountconf is True:
+def does_config_exist():
+    exist_account_conf = os.path.isfile('./conf.ini')
+    if exist_account_conf is True:
         print("Ini Found: True")
     else:
         print("Ini Found: False.. Generating")
