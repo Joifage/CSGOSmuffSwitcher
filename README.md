@@ -16,6 +16,8 @@ Run the bat file and follow the instructions, if you need to revert to the first
 
 If you don't like the dank choon feel free to delete it from the sound folder
 
+Sound Used: https://www.youtube.com/watch?v=l7qDHE1PEGA - NerdOut!
+
 [changelog]
 
 v1.2
