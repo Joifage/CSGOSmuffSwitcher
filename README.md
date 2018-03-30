@@ -4,9 +4,9 @@ Author: Joif
 
 Purpose: Fast Switching between Steam accounts
 
-Version: 1.1
+Version: 1.2
 
-Date updated: 14/03/2018
+Date updated: 30/03/2018
 
 Written for Python3.6 
 
@@ -17,6 +17,14 @@ Run the bat file and follow the instructions, if you need to revert to the first
 If you don't like the dank choon feel free to delete it from the sound folder
 
 [changelog]
+
+v1.2
+- Reduced volume of dank toon
+- Added additional config line for steamid
+- Some basic stat features (may see further expansion)
+- Added poorly implemented countdowns for London Major hype
+- Added taskkill for Steam processes that dont exit cleanly
+- Various code cleanup/tweaks
 
 v1.1
 
