@@ -1,7 +1,7 @@
 # Author:           Joif
 # Purpose:          Allow fast switching between multiple steam accounts
-# Version:          1.1
-# Date updated:     21/03/2018
+# Version:          1.2
+# Date updated:     30/03/2018
 
 import sys
 sys.path.insert(0, './functions')
