@@ -18,6 +18,8 @@ If you don't like the dank choon feel free to delete it from the sound folder
 
 Sound Used: https://www.youtube.com/watch?v=l7qDHE1PEGA - NerdOut!
 
+Thanks: Shout out to my boi ddarkeh.
+
 [changelog]
 
 v1.2
