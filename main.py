@@ -250,9 +250,6 @@ def end():
     CloseKey(aReg)
     exit(1)
 
-
 if __name__ == '__main__':
     checksteam.isrunning()
-
-if __name__ == '__main__':
     main()
