@@ -4,9 +4,9 @@ Author: Joif
 
 Purpose: Fast Switching between Steam accounts
 
-Version: 1.2
+Version: 1.21
 
-Date updated: 30/03/2018
+Date updated: 10/05/2018
 
 Written for Python3.6 
 
