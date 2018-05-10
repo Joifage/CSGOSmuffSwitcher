@@ -23,6 +23,7 @@ Thanks: Shout out to my boi ddarkeh.
 [changelog]
 v.1.21
 - Improved handling of failed steam/csgo launches
+
 v1.2
 - Reduced volume of dank toon
 - Added additional config line for steamid
