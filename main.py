@@ -1,7 +1,7 @@
 # Author:           Joif
 # Purpose:          Allow fast switching between multiple steam accounts
-# Version:          1.2
-# Date updated:     30/03/2018
+# Version:          1.1
+# Date updated:     21/03/2018
 
 import sys
 sys.path.insert(0, './functions')
@@ -30,15 +30,13 @@ except:
 
 def main():
     choice = 'none'
-    while choice >= "0" or choice <= "16" or choice != "a" or choice != "d" or choice != "e" or choice != "x" or choice != "m":
+    count()
+    while choice <= "0" and choice >= str(account_count) or choice not in ("a", "d", "e", "x", "m"):
         does_config_exist()
-        count()
         importlib.reload(accountread)
         a = accountread
-        countdown1 = (datetime.datetime(2018, 4, 2, 13, 00, 00) - datetime.datetime.now())
         countdown2 = (datetime.datetime(2018, 9, 20, 10, 00, 00) - datetime.datetime.now())
         print("\n Major Start:", str(countdown2).split(".", 1)[0])
-        print(" Ticket Sale:", str(countdown1).split(".", 1)[0])
         print("""   _____                       __    _____         _ _       _               
   / ____|                     / _|  / ____|       (_) |     | |              
  | (___  _ __ ___  _   _ _ __| |_  | (_____      ___| |_ ___| |__   ___ _ __ 
@@ -119,67 +117,67 @@ def main():
         global lastused
         lastused = str(datetime.date.today())
         usrid = choice
-        if choice == "1":
+        if choice == "1" and a.active1 == "Y":
             userreg = a.username1
             autolaunch = a.autolaunch1
             end()
-        elif choice == "2":
+        elif choice == "2" and a.active2 == "Y":
             userreg = a.username2
             autolaunch = a.autolaunch2
             end()
-        elif choice == "3":
+        elif choice == "3" and a.active3 == "Y":
             userreg = a.username3
             autolaunch = a.autolaunch3
             end()
-        elif choice == "4":
+        elif choice == "4" and a.active4 == "Y":
             userreg = a.username4
             autolaunch = a.autolaunch4
             end()
-        elif choice == "5":
+        elif choice == "5" and a.active5 == "Y":
             userreg = a.username5
             autolaunch = a.autolaunch5
             end()
-        elif choice == "6":
+        elif choice == "6" and a.active6 == "Y":
             userreg = a.username6
             autolaunch = a.autolaunch6
             end()
-        elif choice == "7":
+        elif choice == "7" and a.active7 == "Y":
             userreg = a.username7
             autolaunch = a.autolaunch7
             end()
-        elif choice == "8":
-            userreg = a.username
+        elif choice == "8" and a.active8 == "Y":
+            userreg = a.username8
             autolaunch = a.autolaunch8
             end()
-        elif choice == "9":
+        elif choice == "9" and a.active9 == "Y":
             userreg = a.username9
             autolaunch = a.autolaunch9
             end()
-        elif choice == "10":
+        elif choice == "10" and a.active10 == "Y":
             userreg = a.username10
             autolaunch = a.autolaunch10
             end()
-        elif choice == "11":
+        elif choice == "11" and a.active11 == "Y":
             userreg = a.username11
             autolaunch = a.autolaunch11
             end()
-        elif choice == "12":
+        elif choice == "12" and a.active12 == "Y":
             userreg = a.username12
             autolaunch = a.autolaunch12
             end()
-        elif choice == "13":
+        elif choice == "13" and a.active13 == "Y":
             userreg = a.username13
             autolaunch = a.autolaunch13
             end()
-        elif choice == "14":
+        elif choice == "14" and a.active14 == "Y":
             userreg = a.username14
             autolaunch = a.autolaunch14
             end()
-        elif choice == "15":
+        elif choice == "15" and a.active15 == "Y":
             userreg = a.username15
             autolaunch = a.autolaunch15
             end()
-        elif choice == "16":
+        elif choice == "16" and a.active16 == "Y":
             userreg = a.username16
             autolaunch = a.autolaunch16
             end()
@@ -196,9 +194,10 @@ def main():
             winsound.PlaySound(None, winsound.SND_PURGE)
         elif choice == "0":
             print("Exiting... Bye")
-            exit(1)
+            exit(0)
         else:
-            print("Invalid Selection")
+            print(" Invalid Selection")
+            input(" Press Enter to continue")
 
 
 def count():
@@ -219,11 +218,12 @@ def count():
 
 def end():
     import time
+    import subprocess
     import os
     print(" Setting account to:", userreg)
-    aReg = ConnectRegistry(None, HKEY_CURRENT_USER)
-    aKey = OpenKey(aReg, r"Software\Valve\Steam", 0, KEY_WRITE)
     try:
+        aReg = ConnectRegistry(None, HKEY_CURRENT_USER)
+        aKey = OpenKey(aReg, r"Software\Valve\Steam", 0, KEY_WRITE)
         SetValueEx(aKey, "AutoLoginUser", 0, REG_SZ, userreg)
         SetValueEx(aKey, "RememberPassword", 0, REG_DWORD, 1)
         config = configparser.ConfigParser()
@@ -232,23 +232,49 @@ def end():
         with open("conf.ini", 'w') as cfgfile:
             config.write(cfgfile)
         cfgfile.close()
+        steam_found = False
+        retries = 0
+        check_pass = 0
         if autolaunch == "Y":
-            webbrowser.open('steam://rungameid/730')
-            for i in range(0, 3):
+            while steam_found is False:
                 os.system('cls')
-                print(" Launching CSGO and exiting." + "." * i)
-                time.sleep(1)
+                print("Launching CSGO and exiting" + "." * retries)
+                if retries in (0, 5, 10):
+                    webbrowser.open('steam://rungameid/730')
+                time.sleep(2)
+                retries += 1
+                processes = subprocess.Popen('tasklist', stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                             stdout=subprocess.PIPE).communicate()[0]
+                if 'csgo.exe'.encode() in processes:
+                    exit()
         else:
-            webbrowser.open('steam://open/main')
-            for i in range(0, 3):
+            while steam_found is False:
                 os.system('cls')
-                print(" Launching Steam and exiting." + "." * i)
-                time.sleep(1)
+                print("Launching Steam and exiting" + "." * retries)
+                if retries in (0, 5, 10):
+                    webbrowser.open('steam://open/main')
+                processes = subprocess.Popen('tasklist', stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                             stdout=subprocess.PIPE).communicate()[0]
+                time.sleep(5)
+                retries += 1
+                if 'Steam.exe'.encode() in processes:
+                    check_pass += 1
+                if retries > 10:
+                    print("Unable start steam, exiting...")
+                    time.sleep(5)
+                    exit()
+                if check_pass >= 3:
+                    steam_found = True
+                    exit()
+    except FileNotFoundError:
+        print("Steam registry key not found, ensure steam is installed correctly")
+        exit()
     except Exception as e:
         print(e)
     CloseKey(aKey)
     CloseKey(aReg)
-    exit(1)
+    exit(0)
+
 
 if __name__ == '__main__':
     checksteam.isrunning()

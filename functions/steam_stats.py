@@ -84,7 +84,8 @@ def get_stats():
         usr_id = a.steamid16
         usr_name = a.username16
     else:
-        print("Invalid Selection or no steam profile ID has been set.")
+        print(" Invalid Selection or no steam profile ID has been set.")
+        input(" Press enter to return")
     try:
         url = REQUEST + API_KEY + '&steamid=' + usr_id + '&format=xml'
         u = urlopen(url)

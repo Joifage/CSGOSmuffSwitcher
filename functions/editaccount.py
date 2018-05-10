@@ -31,10 +31,10 @@ def edit():
         print("\n0. Back")
         print("\nSelect account number to edit or '0' to go back")
         edit_choice = input("Selection: ")
-        while edit_choice >= '0' and edit_choice <= '16':
+        while edit_choice >= '0' or edit_choice <= '16':
             if edit_choice == "0":
                 return
-            elif edit_choice >= '0' and edit_choice <= '16':
+            elif edit_choice >= '0' or edit_choice <= '16':
                 try:
                     print("You have selected account", edit_choice)
                     try:
@@ -89,5 +89,7 @@ def edit():
                     print(e)
             else:
                 print("Incorrect Selection")
+                input("Press Enter to continue")
     else:
         print("Incorrect Selection")
+        input("Press Enter to continue")
