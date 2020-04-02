@@ -13,7 +13,7 @@ def dlextract():
     if csgo_path != "N/A":
         try:
             print("\nChecking file exists on web server")
-            url = 'http://simpleradar.com/downloads/fullpack.zip'
+            url = 'http://www.simpleradar.com/downloads/PanoPat0Buy0Spec2.zip'
             extract_path = 'csgo\\resource\\overviews'
             weburl = urllib.request.urlopen(url)
             zipstatus = str(weburl.getcode())
