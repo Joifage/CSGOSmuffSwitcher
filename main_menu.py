@@ -24,10 +24,8 @@ def main():
     account_count = f.count_active_accounts()
     choice = 'none'
     while "0" >= choice >= str(account_count) or choice not in ("a", "d", "e", "x", "m"):
-        account_list = []
         c.does_config_exist()
         account_list = a.read_from_conf()
-        print("Steam Running:", steam_found)
         print("""   _____                       __    _____         _ _       _               
   / ____|                     / _|  / ____|       (_) |     | |              
  | (___  _ __ ___  _   _ _ __| |_  | (_____      ___| |_ ___| |__   ___ _ __ 
@@ -68,7 +66,7 @@ def main():
                             pyperclip.copy(password)
                             autolaunch_flag = autolaunch
                             usrid = str(int_choice)
-                            f.end(userreg, autolaunch_flag, usrid)
+                            f.launch(userreg, autolaunch_flag, usrid)
                         elif int_choice == index and active == 'N':
                             input("Inactive account selected, please set account to active and try again\nPress Enter "
                                   "to continue")
