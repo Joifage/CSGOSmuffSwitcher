@@ -27,11 +27,13 @@ def main(account_list):
             main_menu.main()
         elif choice == "1":
             simpradar.dlextract()
-            return
+            main_menu.main()
         elif choice == "2":
             buysmuff.buy_smurf()
+            main_menu.main()
         elif choice == "3":
             steam_stats.get_stats(account_list)
+            main_menu.main()
         elif choice == "9":
             try:
                 os.remove('conf.ini')

@@ -23,14 +23,14 @@ def count_active_accounts():
     return int(account_count)
 
 
-def end(userreg, autolaunch_flag, usrid):
+def launch(userreg, autolaunch_flag, usrid):
     import time
     import subprocess
     import os
 
     lastused = str(datetime.date.today())
 
-    print(" Setting account to:", userreg)
+    print("Setting account to:", userreg)
     aReg = ConnectRegistry(None, HKEY_CURRENT_USER)
     aKey = OpenKey(aReg, r"Software\Valve\Steam", 0, KEY_WRITE)
     SetValueEx(aKey, "AutoLoginUser", 0, REG_SZ, userreg)
